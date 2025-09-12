@@ -8,16 +8,20 @@ describe('Orange HRM Testes ', () => {
     checkPage: ".orangehrm-dashboard-grid"
   }
  const userData = {
+    userSuccess: {
       loginSucess: "Admin",
-      passSucess: "admin123",
+      passSucess: "admin123"
+    },
+    userFail: {
       loginFail: "teste",
       passFail: "teste"
+    }
  }
   
   it('Login Sucess', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
-    cy.get(selectorList.usernameField).type(userData.loginSucess)
-    cy.get(selectorList.passwordField).type(userData.passSucess)
+    cy.get(selectorList.usernameField).type(userData.userSuccess.loginSucess)
+    cy.get(selectorList.passwordField).type(userData.userSuccess.passSucess)
     cy.get(selectorList.loginButton).click()
     cy.location('pathname').should('equal' , '/web/index.php/dashboard/index')
     cy.get(selectorList.checkPage)
@@ -26,8 +30,8 @@ describe('Orange HRM Testes ', () => {
 
   it('Login Fail', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
-    cy.get(selectorList.usernameField).type(userData.loginFail)
-    cy.get(selectorList.passwordField).type(userData.passFail)
+    cy.get(selectorList.usernameField).type(userData.userFail.loginFail)
+    cy.get(selectorList.passwordField).type(userData.userFail.passFail)
     cy.get(selectorList.loginButton).click()
     cy.get(selectorList.wrongCredentialAlert)
   })
