@@ -1,13 +1,11 @@
 import userData from '../fixtures/users/userData.json'
+import loginPage from '../loginPage'
 
+const login = new loginPage()
 
 describe('Orange HRM Testes ', () => {
   const selectorList = {
-    usernameField: "[name='username']",
-    passwordField: "[name='password']",
-    loginButton: "[type='submit']",
     selectionTitleTopBar: ".oxd-topbar-header-breadcrumb > .oxd-text",
-    wrongCredentialAlert: "[role='alert']",
     checkPage: ".orangehrm-dashboard-grid",
     myinfoButton: "[href='/web/index.php/pim/viewMyDetails']",
     firstName: "[name='firstName']",
@@ -18,13 +16,12 @@ describe('Orange HRM Testes ', () => {
     selectArrow: ".oxd-select-text--arrow",
     dateCloseButton: ".--close",
     saveButton: "[type='submit']",
-    toastButton: ".oxd-toast"
-  }
+    toastButton: ".oxd-toast",
+    tabIndex: "[tabindex='0']"
+    }
 it.only('User info update - check ', () => {
-    cy.visit('/auth/login')
-    cy.get(selectorList.usernameField).type(userData.userSuccess.loginSucess)
-    cy.get(selectorList.passwordField).type(userData.userSuccess.passSucess)
-    cy.get(selectorList.loginButton).click()
+   login.loginIt()
+   login.loginSucess(userData.userSuccess.loginSucess,userData.userSuccess.passSucess)
     cy.location('pathname').should('equal' , '/web/index.php/dashboard/index')
     cy.get(selectorList.checkPage)
     cy.get(selectorList.myinfoButton).click()
@@ -37,8 +34,13 @@ it.only('User info update - check ', () => {
     cy.get(selectorList.dataField).eq(0).clear().type("2025-12-31")
     cy.get(selectorList.dateCloseButton).click()
     cy.get(selectorList.saveButton).eq(0).click()
-    cy.get('body').should('contain', "Successfully Updated")
-  })  
+    cy.get('.oxd-toast').should('contain', "Successfully Updated")
+    cy.get(selectorList.tabIndex).eq(0).click({force:true})
+    cy.get(':nth-child(4) > span').click({force:true})
+    cy.get(selectorList.tabIndex).eq(1).click({force:true})
+    cy.get(':nth-child(3) > span').click({force:true})
+    
+})
   it('Login Sucess', () => {
     cy.visit('/auth/login')
     cy.get(selectorList.usernameField).type(userData.userSuccess.loginSucess)
