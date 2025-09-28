@@ -1,3 +1,7 @@
+import menuPage from './menuPage'
+
+const menuPageList = new menuPage()
+
 // Define uma classe chamada "dashPage" para organizar seletores e métodos da página de Dashboard
 class dashPage {
 
@@ -5,7 +9,6 @@ class dashPage {
     selectorList(){
         const seletoresDashPage = {
             checkPage: ".orangehrm-dashboard-grid", // Seletor que identifica se a página do Dashboard carregou
-            myinfoButton: "[href='/web/index.php/pim/viewMyDetails']", // Botão "My Info" no menu
             firstName: "[name='firstName']", // Campo de texto para o primeiro nome
             middleName: "[name='middleName']", // Campo de texto para o nome do meio
             lastName: "[placeholder='Last Name']", // Campo de texto para o último nome
@@ -28,7 +31,8 @@ class dashPage {
         cy.get(this.selectorList().checkPage) 
         // Valida que o elemento principal do Dashboard existe
 
-        cy.get(this.selectorList().myinfoButton).click()
+        menuPageList.accessMyinfo()
+        // cy.get(this.selectorList().myinfoButton).click()
         // Clica no botão "My Info" para abrir a página de informações do usuário
     }
 
