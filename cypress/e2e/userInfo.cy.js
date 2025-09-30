@@ -19,13 +19,15 @@ describe('Orange HRM Testes ', () => {
   //   saveButton: "[type='submit']",
   //   toastButton: ".oxd-toast",
   //   tabIndex: "[tabindex='0']"
-    })
+   
 
-it.only('User info update - check ', () => {
+it('User info update - check ', () => {
    // visita a página de login
    login.loginIt()
+   //login para acessar a pagina
+   login.loginUser(userData.userSuccess.loginSucess,userData.userSuccess.passSucess)
    // insere o login e senha
-   login.loginSucess(userData.userSuccess.loginSucess,userData.userSuccess.passSucess)
+   //login.loginSucess(userData.userSuccess.loginSucess,userData.userSuccess.passSucess)
    // checa se está na pagina de dashboard
    dashboardCheck.checkDashBoard()
    //acessa o myinfo da pagina de dashboard e insere o formulário
@@ -46,11 +48,9 @@ it.only('User info update - check ', () => {
     
   // })
 
-//   it('Login Fail', () => {
-//     cy.visit('/auth/login')
-//     cy.get(selectorList.usernameField).type(userData.userFail.loginFail)
-//     cy.get(selectorList.passwordField).type(userData.userFail.passFail)
-//     cy.get(selectorList.loginButton).click()
-//     cy.get(selectorList.wrongCredentialAlert)
-//   })
-// })
+  it('Login Fail', () => {
+   login.loginIt()
+   login.loginUser(userData.userFail.loginFail, userData.userFail.passFail)
+   login.checkInvalidLogin()
+   })
+})
