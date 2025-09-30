@@ -29,7 +29,11 @@ it.only('User info update - check ', () => {
    // checa se está na pagina de dashboard
    dashboardCheck.checkDashBoard()
    //acessa o myinfo da pagina de dashboard e insere o formulário
-   dashboardCheck.insertForm()
+   dashboardCheck.insertName("Andrew", "Valle", "de Souza")
+   dashboardCheck.insertCad("1234567","222444","2345678")
+   dashboardCheck.insertDate("1995-03-01")
+   dashboardCheck.insertComboBox()
+   dashboardCheck.saveButton()
  
 })
   // it('Login Sucess', () => {
