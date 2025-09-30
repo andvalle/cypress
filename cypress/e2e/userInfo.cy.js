@@ -4,23 +4,11 @@ import loginPage from '../loginPage'
 
 const login = new loginPage()
 const dashboardCheck = new dashboardPage()
+const Chance = require('chance');
+const chance = new Chance();
 
-describe('Orange HRM Testes ', () => {
-  // const selectorList = {
-  //   checkPage: ".orangehrm-dashboard-grid",
-  //   myinfoButton: "[href='/web/index.php/pim/viewMyDetails']",
-  //   firstName: "[name='firstName']",
-  //   middleName: "[name='middleName']",
-  //   lastName: "[placeholder='Last Name']",
-  //   genericField: ".oxd-input--active",
-  //   dataField: "[placeholder='yyyy-dd-mm']",
-  //   selectArrow: ".oxd-select-text--arrow",
-  //   dateCloseButton: ".--close",
-  //   saveButton: "[type='submit']",
-  //   toastButton: ".oxd-toast",
-  //   tabIndex: "[tabindex='0']"
-   
-
+describe('USER - Orange HRM Testes ', () => {
+  
 it('User info update - check ', () => {
    // visita a página de login
    login.loginIt()
@@ -31,26 +19,14 @@ it('User info update - check ', () => {
    // checa se está na pagina de dashboard
    dashboardCheck.checkDashBoard()
    //acessa o myinfo da pagina de dashboard e insere o formulário
-   dashboardCheck.insertName("Andrew", "Valle", "de Souza")
+   dashboardCheck.insertName(chance.first(), chance.last(), chance.string())
    dashboardCheck.insertCad("1234567","222444","2345678")
    dashboardCheck.insertDate("1995-03-01")
    dashboardCheck.insertComboBox()
    dashboardCheck.saveButton()
  
 })
-  // it('Login Sucess', () => {
-  //   cy.visit('/auth/login')
-  //   cy.get(selectorList.usernameField).type(userData.userSuccess.loginSucess)
-  //   cy.get(selectorList.passwordField).type(userData.userSuccess.passSucess)
-  //   cy.get(selectorList.loginButton).click()
-  //   cy.location('pathname').should('equal' , '/web/index.php/dashboard/index')
-  //   cy.get(selectorList.checkPage)
-    
-  // })
+ 
 
-  it('Login Fail', () => {
-   login.loginIt()
-   login.loginUser(userData.userFail.loginFail, userData.userFail.passFail)
-   login.checkInvalidLogin()
-   })
+
 })
